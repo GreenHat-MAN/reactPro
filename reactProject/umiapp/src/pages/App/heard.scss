@@ -1,0 +1,25 @@
+.title{
+  fontSize:30;
+  color:black;
+}
+.contentStyle{
+  width: 100%;
+  height: 46px;
+  line-height: 46px;
+  color: black;
+  textAlign: center;
+  display:flex;
+  justifyContent:center;
+  alignItems:'center';
+  margin:0;
+  fontSize:50
+}
+.right{
+  width: 100%;
+  display:flex;
+  alignItems:center;
+  line-height: 46px;
+  color:black;
+  justify-content: space-evenly;
+  align-items: center;
+}

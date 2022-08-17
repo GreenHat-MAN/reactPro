@@ -1,9 +1,15 @@
-import styles from './index.less';
-
-export default function IndexPage() {
+import  '../styles/index.scss';
+import styles from './index.less'
+import {Provider} from "mobx-react";
+import {store} from "@/mobx/store";
+export default function IndexPage(props:any) {
   return (
-    <div>
-      <h1 className={styles.title}>Page index</h1>
-    </div>
+    <Provider {...store}>
+      <div className={styles.allBox}>
+        {/*路由出口*/}
+        {props.children}
+      </div>
+    </Provider>
+
   );
 }
