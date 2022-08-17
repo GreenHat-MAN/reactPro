@@ -1,0 +1,28 @@
+null和undefined ---->null转换数值为0找元素找不到，undefined转换数值为NaN
+封装的组件---->props传递，自定义事件，插槽
+v2和v3的区别----->死背
+如何避免原型链向上查找----->如何避免,用哪一种循环hasOwnProperty方法
+css兼容问题----->
+动画
+正则
+跨域
+node
+webpack
+节流/防抖
+闭包场景
+es6
+ts
+v-model
+npm run server做了什么?
+vuex怎么绑定input?
+10万条数据怎么做优化?
+组件通信的方式
+vue的白屏
+promise的race和all
+promise怎么中断
+vue中实例方法和属性
+nextTick
+axios的封装
+拦截器
+axios头部有哪些
+h5和css3新特性---->h5新特性：拖拽释放API、语义化标签、音频和视频API、画布API、地理API、表单控件等。css3新特性：1、RGBA和HSLA；2、text-shadow；3、border-radius和box-shadow、box-sizing等。

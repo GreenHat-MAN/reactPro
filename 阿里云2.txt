@@ -1,0 +1,357 @@
+
+主页 = 控制台  = 云服务器 
+
+2  阿里云服务器 ECS   https://free.aliyun.com/
+
+地区 随意选 
+操作系统   CentOS 64位 7.6     
+
+非常重要   (实例 用户名和密码)
+用户名     root 
+实例密码   WH2201yyds
+ 
+
+aly 公网IP   47.110.147.103              接口  项目地址 
+    内网IP    172.22.127.175              起本地服务   localhost/主机IP
+
+0. 安全组   （端口不能访问）
+
+1. 远程连接 主机
+
+2. GIT 链接 主机 阿里云ECS
+ssh root@47.94.226.226  
+
+3. xshell 
+
+
+pm2 show 11
+
+https://www.cnblogs.com/haoxinchen/p/9921831.html
+
+1.0 安装node  （https://www.cnblogs.com/zhi-leaf/p/10979629.html）
+
+a. node 官网下载 node linux 版本 
+b. xftp 上到的阿里云服务器 
+c. 新建 ruanjian  把node 拖拽到 这个目录 
+d. 解压  tar -xvf  node-v16.15.0-linux-x64.tar.xz
+e. 移动文件  mv node-v16.15.0-linux-x64 /usr/local/nodejs 
+f. 配置环境变量 
+vim  /etc/profile
+export PATH=$PATH:/usr/local/nodejs/bin
+source /etc/profile
+ESC  :wq!  Enter 
+g node -v    npm -v
+
+
+安装淘宝镜像  cnpm i  
+npm install -g cnpm --registry=https://registry.npm.taobao.org 
+cnpm i nrm -g
+nrm 
+nrm ls
+nrm use taobao 
+
+cnpm i nodemon -g
+cnpm i pm2 -g
+cnpm i supervisor -g
+cnpm i rimraf -g
+cnpm i @vue/cli -g
+cnpm i json-server -g
+cnpm i yarn -g
+
+
+安装yarn  
+mkdir -p /usr/local/yarn
+wget https://github.com/yarnpkg/yarn/releases/download/v1.12.0/yarn-v1.12.0.tar.gz
+tar -zxvf yarn-v1.12.0.tar.gz -C /usr/local/yarn
+vim  /etc/profile
+export PATH=$PATH:/usr/local/yarn/yarn-v1.12.0/bin
+source /etc/profile 
+
+2.0  上线后端 
+a. 根目录新建 myserver
+b. 把本地后台代码上传到 myserver （不要选择 node_modules） 
+c. 反向安装  cnpm i 
+d. node启动  npm  run watch 
+e. pm2 后台永久挂起  
+
+# screen 
+# 后台永久挂起服务 
+# https://www.cnblogs.com/webnote/p/5749675.html
+
+# yum install screen 
+screen -S yourname -> 新建一个叫yourname的session
+screen -ls -> 列出当前所有的session
+screen -r yourname -> 回到yourname这个session
+screen -d yourname -> 远程detach某个session
+screen -d -r yourname -> 结束当前session并回到yourname这个session
+
+jsons
+v2 
+
+
+
+
+3.0 
+
+ mongodb 新的安装方法  步骤 
+
+1. http://www.cnblogs.com/maybo/archive/2016/02/04/5182272.html
+
+2.  新建 ruanjian  文件夹 
+
+3. 切换到  ruanjian  
+
+4. 使用:wget下载数据库　得到：mongodb-linux-x86_64-3.2.1.tgz　安装包
+
+ wget -c https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.2.1.tgz
+
+5. tar－zxvf 解压压缩包  tar -zxvf mongodb-linux-x86_64-3.2.1.tgz
+
+6. 移动  解压文件    mv mongodb-linux-x86_64-3.2.1 /usr/local/mongodb
+
+7. 切换到   /usr/local/mongodb
+
+8. ls 查看  然后新建 data 存放数据库  logs/mongo.log 存放日志文件 
+mkdir data
+mkdir logs
+cd logs
+touch mongo.log
+
+9. 配置 mongo 的环境变量  在任何地方都可以输入 mongo 从而进去 mongo
+
+   修改/etc/profile, 添加如下内容
+   vim /etc/profile
+  输入 i 
+    export PATH=/usr/local/mongodb/bin:$PATH
+
+　　保存后执行如下命令：
+　　vim /etc/profile
+　　source /etc/profile
+
+
+10. 启动  切换到 /usr/local/mongodb/bin (没有必要  因为配置全局环境变量)
+
+注意启动的时候 路径之间不能给空格 
+
+mongod --dbpath=/usr/local/mongodb/data --logpath=/usr/local/mongodb/logs/mongo.log --auth --logappend -port=27017 --fork  
+
+(不需要 需要密码)
+mongod --dbpath=/usr/local/mongodb/data --logpath=/usr/local/mongodb/logs/mongo.log   --logappend --port=27017 --fork
+
+
+11. 在 /usr/local/mongodb/bin (环境变量配置就不需要)  mongo 进入 mongo shell 
+
+
+12. 公网链接   mongo 公网IP
+
+
+13. 设置密码
+0. 设置密码登录  mongod --dbpath=/usr/local/mongodb/data --logpath=/usr/local/mongodb/logs/mongo.log --auth  --logappend --port=27017 --fork
+
+14. mongodb 设置密码
+
+1. use admin 
+2. db.createUser({user: 'root', pwd: 'abc123', roles: ['root']})
+3. db.auth('root', 'abc123')     // 1 成功  2. 失败
+
+4. use wh2204
+5. db.createUser({user:'zuozuomu',pwd:'missyou',roles: [{role:'readWrite',db:'wh2204'}]})
+6. db.auth('zuozuomu','missyou')
+
+
+14. 3t 数据库迁移  
+
+
+15. 修改 connect.js  
+cnpm i  mongoose@5 -S
+
+var conn_db_str =  `mongodb://${dbuser}:${dbpass}@${dbhost}:${dbport}/${dbname}`
+
+16. 启动测试  npm run watch  
+
+17. 永久挂起  
+pm2 start bin/www     启动服务  后台永久挂起 就是看不到 error 
+pm2 list              查看服务列表
+pm2 stop 0            停止当前 服务器  0
+pm2 restart 0         重启当前服务 0
+pm2 delete  0         删除当前
+pm2 show 0          查看详情 
+
+
+4.0 前端项目上线部署 
+a. gitee   服务  gitee pages  /myapp/dist/    http://zuozhaoxi.gitee.io/wh2004/#/login  
+b. 阿里云 nginx   
+c. 部署到 public 
+d. 前端打包  注意点 
+
+1. 把项目里面所有的 localhost 替换成 公网IP
+2. router 设置成 mode:hash 
+3. 设置 打包相对路径  publicPath:"", 
+4. 测试文案 全部去掉  
+5. 打包   npm run build
+6. 本地测试
+7. 线上测试
+8. 正式发布  
+
+
+
+
+4.0  nginx 静态服务器部署   
+
+nginx 静态服务器 安装步骤  
+
+环境配置 
+yum install gcc-c++
+yum install -y pcre pcre-devel
+yum install -y zlib zlib-devel
+yum install -y openssl openssl-devel
+
+0. mkdir ruanjian
+1. cd ruanjian
+2. wget -c https://nginx.org/download/nginx-1.10.1.tar.gz
+3. tar -zxvf nginx-1.10.1.tar.gz
+4. cd nginx-1.10.1
+5. ./configure        写入安装配置   ./configure  --with-http_ssl_module   选择  
+6. make    预安装
+7. make install  
+8. whereis nginx   查看 nginx 安装路径 /usr/local/nginx
+9. 配置环境变量   
+vim /etc/profile
+export PATH=/usr/local/nginx/sbin:$PATH
+source /etc/profile
+10. 启动 nginx  
+
+
+查看进程
+ps aux|grep nginx
+ps -ef | grep nginx
+kill -9 nginx
+netstat -ntlp | grep :80
+
+11.  nginx -s reload  
+ 
+
+12 打开nginx服务器地址  http://47.94.226.226:80
+
+13./usr/local/nginx/html  
+nginx 静态服务器目录    以后所有的文件放置这里 
+
+
+
+14. 配置代理   修改配置文件 nginx.conf 
+cd /usr/local/nginx/conf
+
+vim nginx.conf
+
+location /vue {
+   proxy_pass http://0.0.0.0:1901;
+}
+
+location /api/ {
+   proxy_pass http://0.0.0.0:3333;
+}
+
+location /gateway {
+    proxy_pass https://m.maizuo.com;
+}
+location /api/  {
+    proxy_pass http://101.37.167.221:2101/;
+}
+
+
+
+ location /gateway{
+            proxy_pass https://m.maizuo.com;
+        }
+        location /mobile{
+        proxy_pass https://www.welan.com;
+        }
+        location /yun/{
+        proxy_pass http://47.104.209.44:3333/;
+        }
+        location /api/{
+        proxy_pass http://114.55.1.250:2114/;
+        }
+        location /maoer/{
+        proxy_pass https://www.missevan.com/;
+        }
+
+
+nginx -s reload 
+
+
+http://47.104.209.44:80
+
+/vue/login    ==>  http://47.104.209.44:80/vue/login 
+
+/vue  ===>    http://47.104.209.44:1901/
+
+/vue/login  ==>   http://47.104.209.44:1901/vue/login
+
+
+
+nginx 
+http  转 https
+the "ssl" parameter requires ngx_http_ssl_module 
+
+
+
+https://blog.csdn.net/chanlingmai5374/article/details/81217330
+
+https://blog.csdn.net/qq_34817440/article/details/103639459
+
+
+
+
+改 SSL  ===> https
+0. cd nginx-1.10.1
+1.  ./configure --prefix=/usr/local/nginx --with-http_ssl_module 
+
+
+
+
+
+
+
+
+
+
+
+ 
+2.0 配置安全组  (防火墙)
+
+sudo fuser -k 80/tcp  
+
+负载均衡
+3.0 pm2  https://www.cnblogs.com/lxg0/p/7771229.html
+npm i pm2 -g 全局安装pm2
+
+pm2 start app.js  后台挂起服务
+pm2 show id  查看当前 id 对应的服务 
+pm2 list  查看后台挂起所有服务
+pm2 stop id  根据服务id 停止当前服务 
+pm2 restart id 重启服务 
+pm2 delete id 根据服务 id 删除当前服务 
+
+
+pm2 show   7  -  1809 
+
+开发环境  
+测试环境
+生产环境  
+
+4.0 nuxt
+"watch": "PORT=3800 HOST=0.0.0.0 nuxt start " 
+ pm2 start npm --name "my-nuxt" -- run watch
+
+wx0af05cfd7ea02007
+
+
+
+https://www.jianshu.com/p/10ecc107b5ee
+
+https://blog.csdn.net/weixin_37773766/article/details/80335885?utm_medium=distribute.pc_relevant_download.none-task-blog-baidujs-2.nonecase&depth_1-utm_source=distribute.pc_relevant_download.none-task-blog-baidujs-2.nonecase
+
+netstat -apn  | grep 9999
+
+kill -9  7273
