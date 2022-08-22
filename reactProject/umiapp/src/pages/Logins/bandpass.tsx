@@ -15,6 +15,7 @@ import {
 import {reg} from "@/utils/validate";
 import axios from "axios";
 import {history} from "umi";
+import {Ajax} from "@/api";
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
@@ -88,9 +89,9 @@ const Bandpass:React.FC=(props:any)=> {
       }
     })
     if(res.data.code==200){
-        let data = await axios.patch('http://47.92.127.166:3233/login',{
+        let data = await Ajax.bandpass(
           values
-        }).then(r=>{
+        ).then(r=>{
           message.success('找回成功!!!')
           history.replace('/login')
         })

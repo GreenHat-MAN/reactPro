@@ -1,10 +1,22 @@
 import {DefaultFooter, PageContainer, ProLayout,ProBreadcrumb} from '@ant-design/pro-components';
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import defaultProps from '../../router/propRouter'
 import Heard from "@/pages/App/heard";
-import {Link, NavLink} from "umi";
-const App:React.FC=(props:any)=> {
+import {Link} from "umi";
+import {inject, observer} from "mobx-react";
+const App=(props:any)=> {
+
+  const {getRoleListAsync,roleList,userInfo} = props.publicDte;
+
+  const renderRef = useRef(true)
+
+  useEffect(()=>{
+    getRoleListAsync()
+  },[])
+
   const [pathname, setPathname] = useState('/app/main');
+
+
   return (
     <div>
       <ProLayout
@@ -63,4 +75,4 @@ const App:React.FC=(props:any)=> {
   );
 }
 
-export default App;
+export default inject('publicDte')(observer(App));

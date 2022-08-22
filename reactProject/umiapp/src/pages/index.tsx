@@ -5,10 +5,10 @@ import {store} from "@/mobx/store";
 export default function IndexPage(props:any) {
   return (
     <Provider {...store}>
-      <div className={styles.allBox}>
-        {/*路由出口*/}
-        {props.children}
-      </div>
+        <div className={styles.allBox}>
+          {/*路由出口*/}
+          {props.children}
+        </div>
     </Provider>
 
   );

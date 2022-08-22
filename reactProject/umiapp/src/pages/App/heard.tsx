@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {Row,Col,Typography, Carousel, Space, Dropdown, Menu, Tooltip, Button, Modal} from "antd";
+import React, {useEffect, useState} from 'react';
+import {Row,Col,Typography, Carousel, Space, Dropdown, Menu, Tooltip, Button, Modal, Tag} from "antd";
 import {ProBreadcrumb} from '@ant-design/pro-components';
 import './heard.scss';
 import {DownOutlined,SmileOutlined,PoweroffOutlined,ExclamationCircleOutlined} from '@ant-design/icons';
@@ -9,12 +9,10 @@ import Toux from "@/pages/App/toux";
 import {history} from "umi";
 import { ModalForm, ProFormText } from '@ant-design/pro-components';
 const Heard:React.FC<{publicDte?:any}>=({publicDte}) =>{
-  const {userInfo,changeUserInfo} = publicDte
-  const name:string = toJS(userInfo)[0].username
+  const {userInfo,changeUserInfo,roleList} = publicDte
   const {Title} = Typography
   const [visible,setvisible] = useState<boolean>(false)
   const onMenuClick = (item:any)=>{
-    console.log(item)
     if(item.key=='changepass'){
       // 弹框
       setvisible(true)
@@ -89,6 +87,7 @@ const Heard:React.FC<{publicDte?:any}>=({publicDte}) =>{
         />
 
         <ProFormText width="md" name="newPassword" label="新密码" placeholder="请输入新密码" />
+        <ProFormText width="md" name="dbNewPassword" label="确认新密码" placeholder="请输入新密码" />
       </ModalForm>
       <Row>
         <Col span={7}>
@@ -110,10 +109,15 @@ const Heard:React.FC<{publicDte?:any}>=({publicDte}) =>{
         <Col span={7} className="right">
           {
             userInfo && <Space className="info">
+
+              <Tag color={roleList?.find((item:any)=>item.value==userInfo[0].role).color}>
+                {roleList?.find((item:any)=>item.value==userInfo[0].role).text}
+              </Tag>
+
               <Dropdown overlay={menu}>
                 <Space>
                       <span >
-                          {name}
+                          {userInfo[0].stuName}
                       </span>
                   <DownOutlined />
                 </Space>

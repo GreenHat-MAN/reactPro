@@ -1,10 +1,10 @@
 import React from 'react';
 import './login.scss'
-import axios from 'axios';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input,message  } from 'antd';
 import {history, NavLink} from "umi";
 import {inject} from "mobx-react";
+import {Ajax} from "@/api";
 interface params{
   username:string|number,
   password:string|number
@@ -12,21 +12,18 @@ interface params{
 const Login:React.FC<{publicDte:any,props:any}> = ({props,publicDte}) => {
   //mobx数据
   const {userInfo,changeUserInfo} = publicDte
-  // console.log(count)
   const onFinish = async (values: any) => {
     const value:params = {
       username:values.username,
       password:values.password
     }
-    let res = await axios.get(
-      'http://47.92.127.166:3233/login',
-      {params:value}
-    );
-    if(res.data.length>0){
-      changeUserInfo(res.data)
+    let res:any = await Ajax.logins(value)
+    if(res.code==200){
+      changeUserInfo(res.ressult)
+      localStorage.setItem('wh_username',res.ressult.stuName)
+      localStorage.setItem('wh_phone',res.ressult.stuPhone)
+      sessionStorage.setItem("wh_token",res.token)
       history.push('/app/main')
-    }else{
-      message.error('用户名或密码错误');
     }
   };
   return (
