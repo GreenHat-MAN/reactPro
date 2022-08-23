@@ -55,6 +55,34 @@ export const AppRoute = [
         component: '@/pages/classManger/classadd',
       },
 
+      //建议
+      {
+        path: '/app/message',
+        redirect:'/app/message/msglist',
+      },
+      {
+        path: '/app/message/msglist',
+        component: '@/pages/Message/msglist',
+      },
+      {
+        path: '/app/message/msgadd',
+        component: '@/pages/Message/msgadd',
+      },
+
+      //面试
+      {
+        path: '/app/audition',
+        redirect:'/app/audition/audlist',
+      },
+      {
+        path: '/app/audition/audlist',
+        component: '@/pages/audition/audlist',
+      },
+      {
+        path: '/app/audition/myaudition',
+        component: '@/pages/audition/myaudition',
+      },
+
       //我的
       {
         path:'/app/mine',

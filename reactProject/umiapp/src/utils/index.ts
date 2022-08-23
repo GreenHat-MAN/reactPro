@@ -27,3 +27,67 @@ export function getWeekInYear() {
 }
 
 
+export const diffTypes = [
+  {
+    label:"简单",
+    value:1,
+    id:1,
+    color:"#123456"
+  },
+  {
+    label:"复杂",
+    value:2,
+    id:2,
+    color:"#f50"
+  },
+  {
+    label:"变态",
+    value:3,
+    id:3,
+    color:"#0f0"
+  },
+
+]
+
+
+export const cateTypes:any = [
+  {
+    label:"原生JS",
+    value:"JS",
+    id:1,
+    color:"#123456"
+  },
+  {
+    label:"CSS题目",
+    value:"css",
+    id:2,
+    color:"#f50"
+  },
+  {
+    label:"Vue题目",
+    value:"vue",
+    id:3,
+    color:"#0f0"
+  },
+  {
+    label:"React题目",
+    value:"react",
+    id:4,
+    color:"#ccc"
+  },
+  {
+    label:"小程序",
+    value:'wx',
+    id:5,
+    color:"#333"
+  },
+  {
+    label:"Node后台",
+    value:'node',
+    id:6,
+    color:"#b5b5b5"
+  },
+
+]
+
+

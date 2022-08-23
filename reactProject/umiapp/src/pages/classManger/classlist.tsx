@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
-import {Button, Dropdown, Menu, message, Space, Tag} from 'antd';
+import {Button, Dropdown, Menu, message, Popconfirm, Space, Tag} from 'antd';
 import { useRef } from 'react';
 import { request } from 'umi';
 import {Ajax} from "@/api";
@@ -18,7 +18,16 @@ type GithubIssueItem = {
 };
 
 const  Classlist:React.FC=(props:any) => {
+
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
+
+  const confirm = async (row:any,action:any) => {
+    let res = await Ajax.removeclass({_id:row._id}) as any
+    if (res.code==200){
+      message.success('Click on Yes');
+      action.reload
+    }
+  };
 
   const columns: ProColumns<GithubIssueItem>[] = [
     {
@@ -68,13 +77,16 @@ const  Classlist:React.FC=(props:any) => {
         >
           编辑
         </a>,
-        <TableDropdown
-          onSelect={() => action?.reload()}
-          menus={[
-            { key: 'copy', name: '复制' },
-            { key: 'delete', name: '删除' },
-          ]}
-        />,
+        <Popconfirm
+          title="确认删除嘛?"
+          onConfirm={()=>confirm(row,action)}
+          okText="Yes"
+          cancelText="No"
+        >
+        <a key="delete">
+          删除
+        </a>
+        </Popconfirm>,
       ],
     },
   ];
@@ -97,10 +109,13 @@ const  Classlist:React.FC=(props:any) => {
         type: 'single',
         editableKeys,
         onSave: async (key,row)=>{
-          // let res = await Ajax.updateAll(row) as any
-          // if(res.code==200){
-          //   message.success('保存成功!!!')
-          // }
+          let res = await Ajax.updateclass(row) as any
+          if(res.code==200){
+            message.success('保存成功!!!')
+          }
+        },
+        onDelete:async (_id,type)=>{
+          await Ajax.removeclass({_id:_id})
         },
         onChange: setEditableRowKeys,
       }}
@@ -135,7 +150,7 @@ const  Classlist:React.FC=(props:any) => {
         onChange: (page) => console.log(page),
       }}
       dateFormatter="string"
-      headerTitle="高级表格"
+      headerTitle="班级列表"
       toolBarRender={() => [
       // 底部
       ]}

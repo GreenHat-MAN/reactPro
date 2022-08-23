@@ -1,4 +1,4 @@
-import { AntDesignOutlined, CrownOutlined, SmileOutlined, TabletOutlined } from '@ant-design/icons';
+import { AntDesignOutlined, CrownOutlined, SmileOutlined, TabletOutlined,WeiboOutlined,WindowsOutlined,TwitterOutlined } from '@ant-design/icons';
 export default {
   route: {
     path: '/app',
@@ -89,11 +89,55 @@ export default {
         ],
       },
       {
+        path: '/app/message',
+        name: '建议页',
+        icon: <WeiboOutlined />,
+        redirect:'/app/message/msglist',
+        routes: [
+          {
+            path: '/app/message/msglist',
+            name: '意见列表',
+            breadcrumbName:'意见列表',
+            icon: <WeiboOutlined />,
+            role:1,
+          },
+          {
+            path: '/app/message/msgadd',
+            name: '添加建议',
+            role:2,
+            breadcrumbName:'添加建议',
+            icon: <WeiboOutlined />,
+          },
+        ],
+      },
+      {
+        path: '/app/audition',
+        name: '面试广场',
+        icon: <TwitterOutlined />,
+        redirect:'/app/audition/audlist',
+        routes: [
+          {
+            path: '/app/audition/audlist',
+            name: '面试题列表',
+            breadcrumbName:'面试题列表',
+            icon: <TwitterOutlined />,
+            role:1,
+          },
+          {
+            path: '/app/audition/myaudition',
+            name: '我的面试题',
+            role:1,
+            breadcrumbName:'我的面试题',
+            icon: <TwitterOutlined />,
+          },
+        ],
+      },
+      {
         path:'/app/mine',
         name: '我的',
         breadcrumbName:'我的',
         role:0,
-        icon: <AntDesignOutlined />,
+        icon: <WindowsOutlined />,
         component: '@/pages/Home/mine'
       },
     ],

@@ -11,6 +11,15 @@ class PublicDte {
 
   @observable setUlist:any = [];
 
+  @observable msList = [];
+
+  @action   changeMsList = async (payload?:any)=>{
+    let res = await Ajax.findms(payload) as any;
+    if(res.code==200){
+      this.msList = res.result;
+    }
+  }
+
   @action  getUserInfoAsync = async  (payload:any)=>{
     let res:any = await Ajax.userAll(payload)
     if(res.code==200){

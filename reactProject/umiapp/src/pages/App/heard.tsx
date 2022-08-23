@@ -110,8 +110,8 @@ const Heard:React.FC<{publicDte?:any}>=({publicDte}) =>{
           {
             userInfo && <Space className="info">
 
-              <Tag color={roleList?.find((item:any)=>item.value==userInfo[0].role).color}>
-                {roleList?.find((item:any)=>item.value==userInfo[0].role).text}
+              <Tag color={roleList?.find((item:any)=>item.value==userInfo[0]?.role).color}>
+                {roleList?.find((item:any)=>item.value==userInfo[0]?.role).text}
               </Tag>
 
               <Dropdown overlay={menu}>

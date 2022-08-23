@@ -38,10 +38,10 @@ export const Ajax = {
 
 
     // // 学科
-    // addxueke:(data)=>post("/api/addxueke",data),
-    // updatexueke:(data)=>post("/api/updatexueke",data),
-    // removexueke:(data)=>post("/api/removexueke",data),
-    // findxueke:(data)=>post("/api/findxueke",data),
+    addxueke:(data:any)=>post("/api/addxueke",data),
+    updatexueke:(data:any)=>post("/api/updatexueke",data),
+    removexueke:(data:any)=>post("/api/removexueke",data),
+    findxueke:(data:any)=>post("/api/findxueke",data),
     //
     // // 班级
     addbanji:(data:any)=>post("/api/addbanji",data),
@@ -77,4 +77,12 @@ export const Ajax = {
     // findAttend:(data)=>post("/api/allAttend",data), //查看全部考勤记录
     // searchAttend:(data)=>post("/api/myAttend",data), //查看单人考勤记录
     // upAttend:(data)=>post("/api/updAttend",data), //修改考勤记录
+
+
+      // 面试题
+      addms:(data:any)=>post("/api/addms",data),
+
+      findms:(data:any)=>post("/api/findms",data),
+
+      findmsone:(data:any)=>post("/api/findmsone",data),
 }
