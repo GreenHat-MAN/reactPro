@@ -4,25 +4,43 @@ import defaultProps from '../../router/propRouter'
 import Heard from "@/pages/App/heard";
 import {Link} from "umi";
 import {inject, observer} from "mobx-react";
+import {Ajax} from "@/api";
 const App=(props:any)=> {
-
   const {getRoleListAsync,roleList,userInfo} = props.publicDte;
+  const [pathname, setPathname] = useState('/app/main');
+  let {route:{routes}} = defaultProps
 
-  const renderRef = useRef(true)
+  // 根据role 返回 对应的用户路由数据
+  const getRouterList = (arr:any,role:any)=>{
+    let newList = arr.filter((it:any) =>role>=it.role);
+    newList.forEach((it:any) => {
+      if (it.routes) {
+        return (it.routes = getRouterList(it.routes, role));
+      }
+    });
+    return newList;
+  }
+
+  const getUser = async () =>{
+    let res = await Ajax.userAll({}) as any
+    if (res.code == 200){
+      defaultProps.route.routes=getRouterList(routes,res.result[0].role)
+    }
+  }
+
 
   useEffect(()=>{
     getRoleListAsync()
+    getUser()
   },[])
-
-  const [pathname, setPathname] = useState('/app/main');
 
 
   return (
-    <div>
+    userInfo&&<div>
       <ProLayout
         {...defaultProps}
         style={{
-          height: '100vh',
+          minHeight: '100vh',
         }}
 
         breadcrumbRender={(defaultProps = []) => [
@@ -37,12 +55,14 @@ const App=(props:any)=> {
           pathname,
         }}
 
+
+
         menuItemRender={(item, dom)=>(
           <p onClick={() => {
             setPathname(item.path || '/app');
           }}>
             {item.icon}
-            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
             {item.name}
             <Link to={item.path?item.path:'/app'}></Link>
           </p>
@@ -61,6 +81,7 @@ const App=(props:any)=> {
 
 
         <PageContainer
+          style={{width:'100%',height:'100%',overflow:'hidden'}}
           header={{
             title:'',
           }}

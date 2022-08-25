@@ -1,4 +1,14 @@
-import { AntDesignOutlined, CrownOutlined, SmileOutlined, TabletOutlined,WeiboOutlined,WindowsOutlined,TwitterOutlined } from '@ant-design/icons';
+import {
+  AntDesignOutlined,
+  CrownOutlined,
+  SmileOutlined,
+  TabletOutlined,
+  WeiboOutlined,
+  WindowsOutlined,
+  TwitterOutlined,
+AndroidOutlined,
+ChromeOutlined
+} from '@ant-design/icons';
 export default {
   route: {
     path: '/app',
@@ -6,14 +16,15 @@ export default {
     routes: [
       {
         path:'/app',
-        redirect:'/app/main'
+        redirect:'/app/main',
+        role:1,
       },
       {
         path:'/app/main',
         name: '主页',
         breadcrumbName:'主页',
         icon: <SmileOutlined />,
-        role:0,
+        role:1,
         component:'@/pages/Home/main'
       },
       {
@@ -21,6 +32,7 @@ export default {
         name: '用户页',
         icon: <CrownOutlined />,
         redirect:'/app/user/userList',
+        role:4,
         routes: [
           {
             path: '/app/user/userlist',
@@ -45,6 +57,7 @@ export default {
         name: '通知页',
         icon: <CrownOutlined />,
         redirect:'/app/auution/auutionlist',
+        role:1,
         routes: [
           {
             path: '/app/auution/auutionlist',
@@ -58,7 +71,7 @@ export default {
             path: '/app/auution/auutionadd',
             name: '通知数据',
             breadcrumbName:'通知数据',
-            role:0,
+            role:1,
             icon: <CrownOutlined />,
             component: '@/pages/auution/auutionAdd',
           },
@@ -69,6 +82,7 @@ export default {
         name: '班级页',
         icon: <TabletOutlined />,
         redirect:'/app/class/classlist',
+        role:2,
         routes: [
           {
             path: '/app/class/classlist',
@@ -93,6 +107,7 @@ export default {
         name: '建议页',
         icon: <WeiboOutlined />,
         redirect:'/app/message/msglist',
+        role:1,
         routes: [
           {
             path: '/app/message/msglist',
@@ -115,6 +130,7 @@ export default {
         name: '面试广场',
         icon: <TwitterOutlined />,
         redirect:'/app/audition/audlist',
+        role:1,
         routes: [
           {
             path: '/app/audition/audlist',
@@ -133,10 +149,49 @@ export default {
         ],
       },
       {
+        path: '/app/mianshi',
+        name: '面试',
+        icon: <ChromeOutlined />,
+        redirect:'/app/mianshi/mianlist',
+        role:1,
+        routes: [
+          {
+            path: '/app/mianshi/mianlist',
+            name: '面试中心',
+            breadcrumbName:'面试中心',
+            icon: <ChromeOutlined />,
+            role:1,
+          },
+          {
+            path: '/app/mianshi/mymian',
+            name: '俺的面试',
+            role:1,
+            breadcrumbName:'俺的面试',
+            icon: <ChromeOutlined />,
+          },
+        ],
+      },
+      {
+        path: '/app/check',
+        name: '考勤',
+        icon: <AndroidOutlined />,
+        redirect:'/app/check/mycheck',
+        role:1,
+        routes: [
+          {
+            path: '/app/check/mycheck',
+            name: '我的考勤',
+            breadcrumbName:'我的考勤',
+            icon: <AndroidOutlined />,
+            role:1,
+          }
+        ],
+      },
+      {
         path:'/app/mine',
         name: '我的',
         breadcrumbName:'我的',
-        role:0,
+        role:1,
         icon: <WindowsOutlined />,
         component: '@/pages/Home/mine'
       },

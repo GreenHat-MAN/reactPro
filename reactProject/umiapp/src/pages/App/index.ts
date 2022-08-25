@@ -83,12 +83,41 @@ export const AppRoute = [
         component: '@/pages/audition/myaudition',
       },
 
+      //面试中心
+      {
+        path: '/app/mianshi',
+        redirect:'/app/mianshi/mianlist',
+      },
+      {
+        path: '/app/mianshi/mianlist',
+        component: '@/pages/mianshi/mianlist',
+      },
+      {
+        path: '/app/mianshi/mymian',
+        component: '@/pages/mianshi/mymian',
+      },
+
+      //考勤
+      {
+        path: '/app/check',
+        redirect:'/app/check/mycheck',
+      },
+      {
+        path: '/app/check/mycheck',
+        component: '@/pages/checkwork/mywork',
+      },
+
       //我的
       {
         path:'/app/mine',
         component: '@/pages/Home/mine'
-      }
+      },
 
+    //  404
+      {
+        path:'*',
+        redirect: '/404'
+      }
 
     ]
   }

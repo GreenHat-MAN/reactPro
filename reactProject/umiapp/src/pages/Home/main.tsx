@@ -10,7 +10,7 @@ const Main:React.FC<{props:any,publicDte:any}>=({props,publicDte})=> {
   const [responsive, setResponsive] = useState(false);
 
   return (
-    <div style={{width:'100%',height:'100hv',overflow:"hidden"}}>
+    <div style={{width:'100%'}}>
       <RcResizeObserver
         key="resize-observer"
         onResize={(offset) => {
@@ -18,6 +18,7 @@ const Main:React.FC<{props:any,publicDte:any}>=({props,publicDte})=> {
         }}
       >
         <ProCard
+          style={{overflow:'auto',maxHeight:'650px'}}
           title="数据概览"
           extra="2019年9月28日 星期五"
           split={responsive ? 'horizontal' : 'vertical'}

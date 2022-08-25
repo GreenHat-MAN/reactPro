@@ -25,7 +25,7 @@ const Audlist:React.FC=(props:any)=> {
             toolBarRender={() => {
               return [
                 <Button key="3" type="primary" onClick={()=>{
-                  history.push("/app/ms/add")
+                  history.push("/app/audition/myaudition")
                 }}>
                   新建
                 </Button>,
@@ -57,11 +57,6 @@ const Audlist:React.FC=(props:any)=> {
               },
               extra: {
                 render: (text:any,item:any) => (
-                  // <img
-                  //     width={272}
-                  //     alt="logo"
-                  //     src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                  // />
                   <div>
                     <Button onClick={()=>history.push("/app/ms/detail/"+item._id)} danger size="small">查看详情</Button>
                     {item.author.stuName==userInfo?.username && <Button onClick={()=>history.push("/app/ms/update/"+item._id)} danger size="small">修改</Button>}

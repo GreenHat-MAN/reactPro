@@ -108,16 +108,17 @@ const Heard:React.FC<{publicDte?:any}>=({publicDte}) =>{
         </Col>
         <Col span={7} className="right">
           {
-            userInfo && <Space className="info">
+            userInfo&&<Space className="info">
 
-              <Tag color={roleList?.find((item:any)=>item.value==userInfo[0]?.role).color}>
-                {roleList?.find((item:any)=>item.value==userInfo[0]?.role).text}
+              <Tag color={
+                roleList.find((item:any)=>item.value==userInfo[0]?.role)?.color}>
+                {roleList.find((item:any)=>item.value==userInfo[0]?.role)?.text}
               </Tag>
 
               <Dropdown overlay={menu}>
                 <Space>
                       <span >
-                          {userInfo[0].stuName}
+                          {userInfo[0]?.stuName}
                       </span>
                   <DownOutlined />
                 </Space>

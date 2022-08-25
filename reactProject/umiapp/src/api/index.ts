@@ -30,9 +30,11 @@ export const Ajax = {
     //
     updatePlus:(data:any)=>post("api/updatePlus",data), //修改方法
     //
-    // addAuition:(data)=>post("/api/addAudition",data), //添加面试题
-    //
-    // searchAuition:(data)=>post("/api/searchAudition",data), //查询面试题
+    addAuition:(data:any)=>post("/api/addAudition",data), //添加面试题
+
+    searchAuition:(data:any)=>post("/api/searchAudition",data), //查询面试题
+
+    seaaution:(data:any)=>post('/api/sehAudition',data),//查询单个面试题
     //
     uploadfiles:(data:any)=>post("/api/uploads",data), //上传图片
 
@@ -50,9 +52,9 @@ export const Ajax = {
     updateclass:(data:any)=>post("/api/updateclass",data),
     //
     //
-    // // 评论
-    // adddis:(data)=>post("/api/addDis",data), //添加评论
-    // finddis:(data)=>post("/api/findDis",data), //查询全部评论
+    // 评论
+    adddis:(data:any)=>post("/api/addDis",data), //添加评论
+    finddis:(data:any)=>post("/api/findDis",data), //查询全部评论
     //
     //
     // // 通知
@@ -61,9 +63,12 @@ export const Ajax = {
     sercherpublic:(data:any)=>post("/api/serPub",data), //查询通知
     //
     //
-    // // 意见
-    // addAdvise:(data)=>post("/api/addvise",data), //添加意见
-    // findAdvise:(data)=>post("/api/findAddvise",data), //查询意见
+    // 意见
+    addAdvise:(data:any)=>post("/api/addvise",data), //添加意见
+    findAdvise:(data:any)=>post("/api/findAddvise",data), //查询意见
+    deladvise:(data:any)=>post("/api/deladvise",data), //删除意见
+    updateadvise:(data:any)=>post("/api/updateAdvise",data), //删除意见
+
     //
     //
     // // 成绩
